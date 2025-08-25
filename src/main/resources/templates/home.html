@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+
+
+    <body>
+
+        <div class="container">
+            <header>
+
+                <div class="left-side">
+                    <div class="greeting">Merhaba <strong th:text="${username}">Kullanıcı</strong>, bugün ne okumak istersin?</div>
+
+                    <form method="get" action="/books/search" class="search-bar">
+                        <input type="text" name="query" placeholder="Ara...">
+                        <button type="submit">Ara</button>
+                    </form>
+
+                </div>
+
+                <div class="right-side">
+                <button class="user-btn">
+                    <img src="/photos/user.JPG" alt="User">
+                </button>
+                <div class="user-menu">
+                    <button id="profileBtn">Profil</button>
+                    <button id="logoutBtn">Çıkış Yap</button>
+                </div>
+                </div>
+            </header>
+            
+
+            <div class="lists">
+                <div>
+                    <h3>Kategoriler:</h3>
+                    <div class="panel">
+                        <ul id="categoryList">
+                            <li th:each="cat : ${categories}" 
+                                th:text="${cat}" 
+                                th:data-category="${cat}"></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div>
+                    <h3>Sizin için önerilenler:</h3>
+                    <div class="panel">
+                        <ul id="suggestionList">
+                            <li th:each="book : ${suggestions}">
+                                <span th:text="${book.title}"></span> -
+                                <span th:text="${book.authorName} + ' ' + ${book.authorSurname}"></span>
+                                <button class="borrowBtn" 
+                                        th:data-isbn="${book.isbn}"
+                                        th:data-title="${book.title}">
+                                    Ödünç Al
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="quote">
+                "Okumak, zihnin kanatlarını açar."
+            </div>
+        </div>
+
+        <!-- Pop-up -->
+        <div class="popup" id="popup">
+            <div class="popup-content">
+                <div id="popupText"></div>
+                <button id="borrowBtn">Ödünç Al</button>
+                <button id="closePopup">Kapat</button>
+            </div>
+        </div>
+
+        <script src="/js/home.js"></script>
+
+    </body>
+    
+</html>

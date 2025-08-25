@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+  <head>
+      <meta charset="UTF-8" />
+      <title>Profil Sayfası</title>
+      <link rel="stylesheet" href="/css/profile.css">
+  </head>
+
+
+  <body>
+
+    <header>
+      <button class="user-btn" id="userBtn">
+        <img src="photos/user.JPG" alt="Kullanıcı">
+      </button>
+      <div class="user-menu" id="userMenu">
+        <button id="profileBtn">Profil</button>
+        <button id="logoutBtn">Çıkış Yap</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="tabs" id="tabs">
+        <div class="tab active" data-tab="myBooks">Elimdeki Kitaplar</div>
+        <div class="tab" data-tab="history">Kitap Geçmişim</div>
+        <div class="tab" data-tab="info">Kişisel Bilgiler</div>
+        <!-- Kişisel Bilgiler -->
+        
+        <div class="tab" data-tab="password">Şifre Değiştir</div>
+        <div class="tab" data-tab="donate">Kitap Bağışla</div>
+      </div>
+
+      <!-- Elimdeki Kitaplar -->
+      <div class="tab-content active" id="myBooks">
+        <ul class="book-list" id="myBooksList">
+          <!-- JS ile doldurulacak -->
+        </ul>
+      </div>
+
+      <!-- Kitap Geçmişi -->
+      <div class="tab-content" id="history">
+        <ul class="book-list" id="historyList">
+          <!-- JS ile doldurulacak -->
+        </ul>
+      </div>
+
+      <!-- Kişisel Bilgiler -->
+      <div class="tab-content" id="info">
+            <label>İsim:
+                <input type="text" id="nameField" th:value="${user.firstName}" />
+            </label>
+            <label>Soyisim:
+                <input type="text" id="surnameField" th:value="${user.lastName}" />
+            </label>
+            <label>E-Posta:
+                <input type="text" id="emailField" th:value="${user.email}" />
+            </label>
+            <label>TC Kimlik Numarası:
+                <input type="text" id="idField" th:value="${user.tc}" />
+            </label>
+            <button class="action-btn" id="updateInfoBtn">Güncelle</button>
+        </div>
+
+      <!-- Şifre Değiştir -->
+      <div class="tab-content" id="password">
+        <label>Mevcut Şifreniz:
+          <input type="password" id="oldPassword" />
+        </label>
+        <label>Yeni Şifreniz:
+          <input type="password" id="newPassword" />
+        </label>
+        <label>Yeni Şifrenizi Tekrar Giriniz:
+          <input type="password" id="newPasswordAgain" />
+        </label>
+        <button class="action-btn" id="changePasswordBtn">Şifre Güncelle</button>
+      </div>
+
+      <!-- Kitap Bağışla -->
+      <div class="tab-content" id="donate">
+        <label>Kitap Adı:
+          <input type="text" id="donateBookName" />
+        </label>
+        <label>Yazar Adı:
+          <input type="text" id="donateAuthorName" />
+        </label>
+        <label>Yazar Soyadı:
+          <input type="text" id="donateAuthorSurname" />
+        </label>
+        <label>ISBN:
+          <input type="text" id="donateIsbn" maxlength="13" />
+        </label>
+        <label>Kategori:
+          <input type="text" id="donateCategory" />
+        </label>
+        <label>Yayınevi:
+          <input type="text" id="donatePublisher" />
+        </label>
+        <label>Sayfa Sayısı:
+          <input type="number" id="donatePages" />
+        </label>
+        <label>Basım Yılı:
+          <input type="number" id="donateYear" />
+        </label>
+        <label>Baskı Numarası:
+          <input type="number" id="donateEdition" />
+        </label>
+        <button class="action-btn" id="donateSaveBtn">Kaydet</button>
+      </div>
+    </main>
+
+
+        <!-- Modal HTML (body içine ekle) -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Ödeme Bilgileri</h3>
+        <form id="paymentForm">
+          <label>Ad:</label>
+          <input type="text" id="payName" required>
+          <label>Soyad:</label>
+          <input type="text" id="paySurname" required>
+          <label>Kart Numarası:</label>
+          <input type="text" id="cardNumber" required>
+          <button type="submit">Ödeme Yap</button>
+        </form>
+      </div>
+    </div>
+
+
+    <script src="/js/profile.js"></script>
+
+  </body>
+</html>

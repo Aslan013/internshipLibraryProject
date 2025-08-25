@@ -1,0 +1,196 @@
+body {
+    font-family: 'Book Antiqua', serif;
+    margin: 0;
+    background-image: url('/photos/library1.png');
+    background-size: cover;
+    background-position: center;
+    color: white; /* arka plan üstünde görünür olsun */
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+
+    margin: 0 auto; /* yatayda ortalar */
+    padding: 20px 40px;
+    background: transparent;
+    min-height: 100vh;
+    box-sizing: border-box;
+    text-align: center; /* İçeriği ortalar, başlık vs */
+    margin-bottom: 100px;
+}
+
+/* HEADER düzeni */
+header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    flex:1;
+}
+
+.greeting {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.search-bar {
+    display: flex;
+    gap: 6px;
+    width: 100%;        /* container içini tamamen kaplar */
+    max-width: 600px;   /* istersen burada üst limit belirleyebilirsin */
+    margin-top: 10px;
+}
+
+.search-bar input {
+    flex: 1;            /* input alanı tüm boşluğu kaplar */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+}
+
+.search-bar button {
+    padding: 8px 16px;  /* buton biraz daha büyük */
+    font-size: 16px;
+    border: none;
+    background-color: #0056b3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #003f7d;
+}
+
+
+.right-side {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.user-btn img {
+    width: 46px;
+    height: 48px;
+    border-radius: 50%;
+    display: block;
+}
+
+.user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 120px;
+    color: black;
+    z-index: 10;
+}
+
+.user-menu button {
+    background: none;
+    border: none;
+    padding: 10px 12px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+}
+
+.user-menu button:hover {
+    background: #f0f0f0;
+}
+
+.lists {
+    display: flex;
+    gap: 60px;
+    justify-content: center; /* yatayda ortalar */
+    align-items: flex-start; /* dikeyde hizalama */
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    width: 220px;
+    height: 220px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    color: #333;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+ul li {
+    cursor: pointer;
+    padding: 6px 0;
+    color: #333;
+}
+
+ul li:hover {
+    text-decoration: underline;
+}
+
+.quote {
+    margin-top: 40px;
+    font-size: 18px;
+    font-style: italic;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+/* Pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 250px;
+    text-align: center;
+}
+
+.popup-content button {
+    margin-top: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Admin Sayfası</title>
+        <link rel="stylesheet" href="/css/admin.css">
+    </head>
+
+    <body>
+        
+        <div class="container">
+
+            <header>
+                <div class="welcome">Merhaba <strong th:text="${username}"></strong>!</div>
+                <div style="position: relative;">
+                    <button class="user-btn" id="userBtn">
+                        <img src="photos/user.JPG" alt="User" />
+                    </button>
+                    <div class="user-menu" id="userMenu">
+                        <button id="profileBtn">Profil</button>
+                        <button id="logoutBtn">Çıkış Yap</button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="tracking">Kitap Takibi</div>
+                <div class="tab" data-tab="add-user">Kullanıcı Ekle</div>
+                <div class="tab" data-tab="view-user">Kullanıcı Görüntüle</div>
+                <div class="tab" data-tab="add-book">Kitap Ekle</div>
+                <div class="tab" data-tab="view-book">Kitap Görüntüle</div>
+            </div>
+
+            <div class="tab-content active" id="tracking">
+            </div>
+
+            <div class="tab-content" id="view-user">
+    <h3>Kullanıcıları Görüntüle</h3>
+    <div id="userListContainer">
+        <table id="userListTable" border="1" style="width:100%; text-align:left;">
+            <thead>
+                <tr>
+                    <th>Kullanıcı Adı</th>
+                    <th>Ad Soyad</th>
+                    <th>Email</th>
+                    <th>TC</th>
+                    <th>Admin</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Kullanıcılar JS ile eklenecek -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+            <div class="tab-content" id="add-user">
+                <h3>Kullanıcı Ekle</h3>
+                <form id="addUserForm" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="firstName">Ad:</label>
+                        <input type="text" id="firstName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Soyad:</label>
+                        <input type="text" id="lastName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Kullanıcı Adı:</label>
+                        <input type="text" id="username" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Şifre:</label>
+                        <input type="password" id="password" required minlength="8" maxlength="16" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-posta:</label>
+                        <input type="email" id="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="tc">TC Kimlik No:</label>
+                        <input type="text" id="tc" required pattern="\d{11}" title="11 haneli TC Kimlik Numarası" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="isAdmin" />
+                        <label for="isAdmin">Admin mi?</label>
+                    </div>
+                    <button class="action-btn" id="saveUserBtn">Kaydet</button>
+                </form>
+            </div>
+
+            <div class="tab-content" id="add-book">
+                <h3>Kitap Ekle</h3>
+                <form id="addBookForm" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="bookName">Kitap Adı:</label>
+                        <input type="text" id="bookName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="authorName">Yazar Adı:</label>
+                        <input type="text" id="authorName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="authorSurname">Yazar Soyadı:</label>
+                        <input type="text" id="authorSurname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN:</label>
+                        <input type="text" id="isbn" required pattern="\d{13}" title="13 haneli ISBN" />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Kategori:</label>
+                        <input type="text" id="category" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher">Yayınevi:</label>
+                        <input type="text" id="publisher" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="pages">Sayfa Sayısı:</label>
+                        <input type="number" id="pages" required min="1" />
+                    </div>
+                    <div class="form-group">
+                        <label for="publishYear">Basım Yılı:</label>
+                        <input type="number" id="publishYear" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="edition">Baskı Numarası:</label>
+                        <input type="number" id="edition" min="0" />
+                    </div>
+                    <button class="action-btn" id="saveBookBtn">Kaydet</button>
+                </form>
+            </div>
+
+           <div class="tab-content" id="view-book">
+    <h3>Kitapları Görüntüle</h3>
+    <div id="bookListContainer">
+        <table id="bookListTable" border="1" style="width:100%; text-align:left;">
+            <thead>
+                <tr>
+                    <th>Kitap Adı</th>
+                    <th>Yazar</th>
+                    <th>ISBN</th>
+                    <th>Kategori</th>
+                    <th>Yayınevi</th>
+                    <th>Sayfa</th>
+                    <th>Basım Yılı</th>
+                    <th>Baskı</th>
+                    <th>Uygunluk Durumu</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Kitaplar JS ile eklenecek -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+        </div>
+
+        <script src = "/js/admin.js"></script>
+
+    </body>
+</html>

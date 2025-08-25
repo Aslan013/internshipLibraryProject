@@ -1,0 +1,69 @@
+body {
+    background: url("/photos/library1.png") no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 3px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    background-color: cadetblue;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: darkcyan;
+}
+
+a {
+    display: block;         /* satır başından başlasın */
+    width: 180px;           /* buton genişliği */
+    margin: 10px auto;      /* ortalamak için */
+    text-align: center;     /* yazıyı ortala */
+    text-decoration: none;
+    border: solid 2px black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: cadetblue;
+    color: black;
+    transition: 0.3s;
+}
+
+
+a:hover {
+    background-color: darkcyan;
+    color: white;
+}
+
+.sifre {
+    width: 180px;
+    display: block;
+    margin: 15px auto;
+}

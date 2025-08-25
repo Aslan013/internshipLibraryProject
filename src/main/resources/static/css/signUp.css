@@ -1,0 +1,36 @@
+body{
+    background-image: url('/photos/library1.png');
+    background-size: cover;
+    background-position: center;
+}
+
+
+input{
+    font-size: 18px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 3px ;
+    border: none;
+    display: block;
+    border-color: black;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+div{
+    text-align: center;
+}
+
+p{
+    font-size: 18px;
+}
+
+button{
+    border: solid;
+    border-color: black;
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 6px;
+    background-color: cadetblue;
+    color: black;
+    margin: 10px;
+}

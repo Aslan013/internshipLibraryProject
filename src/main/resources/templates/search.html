@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Arama Sayfası</title>
+    <link rel="stylesheet" href="/css/search.css">
+</head>
+<body>
+    <header>
+        <!-- Arama formu -->
+        <form id = "searchForm" method="get" action="/books/search">
+            <input type="text" name="query" placeholder="Kitap, yazar veya kategori ara..." 
+                   th:value="${query}" />
+            <button type="submit">Ara</button>
+        </form>
+
+        <div>
+            <button id="userBtn" class="user-btn">
+            <img src="/photos/user.JPG" alt="User">
+            </button>
+            <div id="userMenu" class="user-menu">
+                <button id="profileBtn">Profil</button>
+                <button id="logoutBtn">Çıkış Yap</button>
+            </div>
+        </div>
+        
+
+    </header>
+
+    <main>
+        
+
+        <!-- Arama sonuçları -->
+        <div id="results">
+            <ul>
+                <li th:each="book : ${books}">
+                    <span th:text="${book.title} + ' - ' + ${book.authorName} + ' ' + ${book.authorSurname}"></span>
+                    <span th:text="${book.status ? ' (Müsait)' : ' (Ödünçte)'}"></span>
+                    <button th:if="${book.status}" 
+                        class="borrowBtn"
+                        th:data-id="${book.isbn}"
+                        th:data-title="${book.title}">
+                        Ödünç Al
+                    </button>
+
+                </li>
+            </ul>
+        </div>
+    </main>
+
+
+    <script src="/js/search.js"></script>
+</body>
+</html>
