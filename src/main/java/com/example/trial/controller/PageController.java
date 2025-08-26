@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Collections;
+import java.util.Optional;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.trial.repository.BookRepository;
 import com.example.trial.repository.UserRepository;
+import com.example.trial.service.MailSenderService;
 import com.example.trial.repository.BorrowedBookRepository;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 
 import com.example.trial.entity.Book;
@@ -35,12 +39,14 @@ public class PageController {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final BorrowedBookRepository borrowedBookRepository;
-
+    private final MailSenderService mailSenderService;
     // Constructor injection
-    public PageController(UserRepository userRepository, BookRepository bookRepository, BorrowedBookRepository borrowedBookRepository) {
+    public PageController(UserRepository userRepository, BookRepository bookRepository, BorrowedBookRepository borrowedBookRepository,
+    MailSenderService mailSenderService) {
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
         this.borrowedBookRepository = borrowedBookRepository;
+        this.mailSenderService = mailSenderService;
     }
 
 
@@ -49,6 +55,27 @@ public class PageController {
     public String mainPage() {
         return "main"; 
     }
+    
+    @PostMapping("/forgot-password")
+    @ResponseBody
+    public String forgotPassword(@RequestParam String username, @RequestParam String email) {
+        Optional<User> optionalUser = userRepository.findById(username);
+        if(optionalUser.isEmpty() || !optionalUser.get().getEmail().equals(email)) {
+            return "Kullanıcı bulunamadı veya e-posta yanlış!";
+        }
+
+        User user = optionalUser.get();
+        try {
+            mailSenderService.sendNewPassword(user);  // mail gönder
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return "Mail gönderilirken hata oluştu!";
+        }
+
+        return "Yeni şifre e-postanıza gönderildi!";
+    }
+
+
 
     @GetMapping("/search")
     public String searchPage() {
@@ -128,6 +155,7 @@ public User getUser(@RequestParam String username) {
 public List<User> getAllUsers() {
     return userRepository.findAll();
 }
+
 @DeleteMapping("/admin/delete-user")
 @ResponseBody
 public Map<String, Object> deleteUser(@RequestParam String username) {
@@ -256,6 +284,28 @@ public Map<String, Object> deleteBook(@RequestParam String isbn) {
         if(username == null) {
             result.put("success", false);
             result.put("message", "Oturum bulunamadı!");
+            return result;
+        }
+
+        
+        // Zorunlu alan kontrolü
+        if(payload.get("title") == null || payload.get("title").isEmpty() ||
+        payload.get("authorName") == null || payload.get("authorName").isEmpty() ||
+        payload.get("authorSurname") == null || payload.get("authorSurname").isEmpty() ||
+        payload.get("isbn") == null || payload.get("isbn").isEmpty() ||
+        payload.get("category") == null || payload.get("category").isEmpty() ||
+        payload.get("publisher") == null || payload.get("publisher").isEmpty() ||
+        payload.get("pages") == null || payload.get("pages").isEmpty() ||
+        payload.get("publishYear") == null || payload.get("publishYear").isEmpty() ||
+        payload.get("edition") == null || payload.get("edition").isEmpty()) {
+            result.put("success", false);
+            result.put("message", "Lütfen tüm alanları doldurun!");
+            return result;
+        }
+
+        if(!payload.get("isbn").matches("\\d{13}")) { 
+            result.put("success", false);
+            result.put("message", "ISBN 13 basamaklı olmalıdır!");
             return result;
         }
 

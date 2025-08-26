@@ -1,7 +1,5 @@
 package com.example.trial.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +9,6 @@ public class User {
     private String username;
 
     @Column(name="userpassword")
-    @JsonIgnore
     private String password;
 
     @Column(name="realname")

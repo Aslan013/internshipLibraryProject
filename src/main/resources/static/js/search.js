@@ -1,4 +1,3 @@
-// Keep the user menu functionality
 const userBtn = document.querySelector('.user-btn');
 const userMenu = document.querySelector('.user-menu');
 userBtn.addEventListener('click', () => {
@@ -16,7 +15,7 @@ document.getElementById('logoutBtn').onclick = () => {
     }
 };
 
-// Keep the borrow book functionality - THIS IS THE IMPORTANT PART
+
 document.addEventListener('click', async (e) => {
     if (e.target.classList.contains('borrowBtn')) {
         const btn = e.target;

@@ -34,7 +34,7 @@
         <div id="results">
             <ul>
                 <li th:each="book : ${books}">
-                    <span th:text="${book.title} + ' - ' + ${book.authorName} + ' ' + ${book.authorSurname}"></span>
+                    <span th:text="${book.title} + ' - ' + ${book.authorName} + ' ' + ${book.authorSurname } + ' - ' + ${book.category}"></span>
                     <span th:text="${book.status ? ' (Müsait)' : ' (Ödünçte)'}"></span>
                     <button th:if="${book.status}" 
                         class="borrowBtn"

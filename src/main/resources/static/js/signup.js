@@ -9,7 +9,14 @@ const data = {
     username: document.getElementById('username').value,
     password: document.getElementById('password').value,
     email: document.getElementById('email').value
+
 };
+
+if(!/^[a-zA-Z0-9]+$/.test(data.username) || !/^[a-zA-Z0-9]+$/.test(data.password)){
+    alert("lütfen kullanıcı adı ve şifrede Türkçe karakter kullanmayınız.");
+    return; // Form gönderilmez
+}
+
 
 // Send to backend
 const res = await fetch('/users', {
@@ -17,12 +24,12 @@ const res = await fetch('/users', {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
 });
-
+const result = await res.text();
 if(res.ok){
     alert("Kayıt başarılı!");
     document.getElementById('signupForm').reset();
     window.location.href= "/main";
 } else {
-    alert("Hata: Alanlar boş olamaz veya kullanıcı zaten var!");
+    alert("Hata: " + result);
 }
 });
